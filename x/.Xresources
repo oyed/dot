@@ -1,0 +1,24 @@
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.autohint: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcdlight
+Xft.rgba: rgb
+
+URxvt*termName: rxvt-256color
+URxvt.depth: 32
+URxvt*lineSpace: 1
+URxvt.letterSpace: -1
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt*geometry: 65x17
+URxvt.scrollBar: false
+URxvt*loginShell: true
+URxvt.internalBorder: 25
+URxvt.perl-ext: default,matcher
+URxvt.url-launcher: google-chrome
+URxvt.font: xft:Dank Mono:size=12,xft:DejaVu Sans Mono for Powerline-10,xft:M+ 1m:Size=12,xft:Symbola:size=12
+
+rofi.font: Dank Mono 12
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi

@@ -1,0 +1,163 @@
+# Set the modifier buttons
+set $mod Mod4
+
+# Set the titlebar font
+font pango:monospace 8
+
+# Use the normal modifier to drag floating windows
+floating_modifier $mod
+
+# Start Picom compositor
+exec_always --no-startup-id "killall -q picom; picom -b --config ~/.config/picom/picom.conf"
+
+# Make sure multi-monitors work
+exec_always --no-startup-id autorandr --change --skip-option crtc rotate gamma reflect
+
+# Start a new Terminal window
+bindsym $mod+Return exec i3-sensible-terminal
+
+# Kill the current window
+bindsym $mod+Shift+q kill
+
+# Rofi Scripts
+bindsym $mod+d exec sh ~/.scripts/rofi-launch.sh
+bindsym $mod+Shift+Return exec sh ~/.scripts/rofi-exec.sh
+
+# Changes window focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Moves a window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Horizontal and Vertical splitting
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Make the current Window fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle floating for current window
+bindsym $mod+Shift+f floating toggle
+
+# Media Player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Volume controls
+#bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2%+
+#bindsym XF86AudioLowerVolume exec amixer -q sset Master 2%-
+#bindsym XF86AudioMute exec amixer -q sset Master toggle
+
+# Workspace definitions
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switching to different Workspaces
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Moving the current Window to a Workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Reload the i3 config file
+bindsym $mod+Shift+c reload
+
+# Restart i3
+bindsym $mod+Shift+r restart
+
+# Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Create the Resize mode
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 4 ppt
+        bindsym Down resize grow height 10 px or 4 ppt
+        bindsym Up resize shrink height 10 px or 4 ppt
+        bindsym Right resize grow width 10 px or 4 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Set all of the colors from Pywal
+set_from_resource $fg i3wm.foreground #f0f0f0
+set_from_resource $bg i3wm.background #f0f0f0
+set_from_resource $pri i3wm.color1 #f0f0f0
+
+# class                 border  background  text  indicator  child_border
+client.focused          $pri    $bg         $fg   $bg        $pri
+client.focused_inactive $pri    $bg         $fg   $bg        $pri
+client.unfocused        $pri    $bg         $fg   $bg        $pri
+client.urgent           $pri    $bg         $fg   $bg        $pri
+client.placeholder      $pri    $bg         $fg   $bg        $pri
+client.background       $pri
+
+# Set the window borders
+for_window [class="^.*"] border pixel 1
+
+# Gaps config
+gaps inner 15
+gaps outer 0
+
+# Floating Windows
+#for_window [class="Peek"] floating enable
+#for_window [instance="origin.exe"] floating enable
+
+# Fullscreen Windows
+#for_window [class="Civ6Sub"] fullscreen enable
+
+# Workspace Definitions
+for_window [class="Slack"]   move to workspace $ws4
+assign     [class="discord"] $ws5
+for_window [class="Spotify"] move to workspace $ws6
+#assign     [class="Thunderbird"] $ws7
+
+# Start-up Apps
+exec_always --no-startup-id wal -R -o "$HOME/.scripts/bg.sh" -n
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+exec --no-startup-id spotify
+exec --no-startup-id slack
+exec --no-startup-id discord
+#exec --no-startup-id thunderbird

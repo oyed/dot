@@ -1,0 +1,53 @@
+include-file = ~/.config/polybar/vars
+include-file = ~/.config/polybar/modules
+
+[bar/bar]
+width = 100%:-28
+height = ${vars.height}
+offset-y = 14
+offset-x = 14
+border-top-size = 1
+border-bottom-size = 1
+border-right-size = 1
+border-left-size = 1
+override-redirect = true
+font-0 = Dank Mono:size=14;3
+font-1 = Material Design Icons:size=16;3
+line-size = ${vars.height}
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-color = ${colors.primary}
+padding-left = 0
+padding-right = 0
+module-margin = ${vars.margin}
+modules-left = ${vars.left}
+modules-center = ${vars.center}
+modules-right = ${vars.right}
+tray-position = none
+tray-detached = false
+tray-background = ${colors.background}
+monitor = ${vars.monitor}
+wm-restack = i3
+
+[bar/placeholder]
+width = 100%
+height = 57
+offset-y = 0
+offset-x = 0
+border-top-size = 0
+border-bottom-size = 0
+border-right-size = 0
+border-left-size = 0
+override-redirect = false
+font-0 = Dank Mono:size=11;3
+line-size = 2
+background = #00000000
+foreground = #00000000
+border-color = #00000000
+padding-left = 0
+padding-right = 0
+module-margin = ${vars.margin}
+modules-center = empty
+tray-position = none
+tray-detached = false
+monitor = ${vars.monitor}

@@ -1,0 +1,67 @@
+[module/memory]
+type = internal/memory
+interval = 1
+label = %percentage_used%%
+format = 󰘚 <label>
+format-background = ${colors.background}
+format-padding = ${vars.padding}
+
+[module/i3]
+type = internal/i3
+pin-workspaces = false
+strip-wsnumbers = true
+index-sort = true
+enable-scroll = false
+label-unfocused-foreground = ${colors.foreground}
+label-focused-foreground = ${colors.secondary}
+label-urgent-foreground = #ff0000
+format-background = ${colors.background}
+format-padding = ${vars.padding}
+
+[module/cpu-use]
+type = internal/cpu
+format = 󰍛 <label>
+format-background = ${colors.background}
+format-padding = ${vars.padding}
+label = %percentage%%
+
+[module/cpu-temp]
+type = internal/temperature
+thermal-zone = 0
+hwmon-path = /sys/class/thermal/thermal_zone0/temp
+format = <label>
+format-warn = <label-warn>
+format-background = ${colors.background}
+format-padding = ${vars.padding}
+label = 󰔏 %temperature-c%
+label-warn = 󰸁 %temperature-c%
+
+[module/date]
+type = internal/date
+date = 󰃭 %a, %d %b
+label = %date%
+label-background = ${colors.background}
+label-padding = ${vars.padding}
+
+[module/time]
+type = internal/date
+date = 󰅐 %H:%M
+label = %date%
+label-background = ${colors.background}
+label-padding = ${vars.padding}
+
+[module/volume]
+type = internal/alsa
+format-volume-padding = ${vars.padding}
+format-muted-padding = ${vars.padding}
+format-volume = <ramp-volume> <label-volume>
+label-muted = 󰝟 Muted
+ramp-volume-0 = 󰕿
+ramp-volume-1 = 󰖀
+ramp-volume-2 = 󰖀
+ramp-volume-3 = 󰕾
+
+[module/empty]
+type = internal/cpu
+format-background = #00000000
+format-padding = 0
